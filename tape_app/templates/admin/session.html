@@ -1,0 +1,94 @@
+
+
+{% extends 'public_layout.html' %}
+{% block content %}
+<section class="ftco-section ">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-xl-12 mb-5 mb-xl-0">
+				<div class="card card-profile shadow">
+					<div class="row ">
+						<div class="col-lg-3 order-lg-2">
+						</div>
+					</div>
+					<div class="card-header  border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+						<div class="row">
+							<div class="col-lg-10">
+								<h1>
+									{{session.session_name}}
+									{% if not session.submitted %}
+										(Not Submitted)
+									{% elif session.submitted and not session.completed %}
+										(In Progress)
+									{% else %}
+										(Completed)
+									{% endif %}
+								</h1>
+							</div>
+						</div>
+					</div>
+					<div class="card-body pt-0 pt-md-4 row">
+						<div class="col-lg-12 ">
+							<h5>Audio files:</h5>
+								{% for sound in session.sounds %}
+									<h4>
+										<a href="{{url_for('bp_admin.download_sound',sound_id=sound.id)}}" class="btn btn-circle btn-info mr-2" data-toggle="modal">
+											<i class="ni ni-bold-down"></i>
+										</a >
+                                        <!-- <button class="btn btn-circle btn-primary mr-2" data-toggle="modal">
+											<i class="ni ni-bold-up"></i>
+										</button > -->
+										{{sound.file_name}} ({{sound.machine}}, {{sound.options}}) -
+										<span class="text-primary credits">{{sound.credits}}<i class="ni ni-tag"></i>
+										</span>
+									</h4>
+								{% endfor %}
+						</div>
+
+
+					</div>
+					<div class="card-footer border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+						<div class="row align-items-end">
+							<div class="col-lg-6">
+								<h2>Total credits:<br>
+								<span class="text-primary credits">{{session.credits}}<i class="ni ni-tag"></i>
+								</span></h2>
+							</div>
+							<div class="col-lg-6">
+                                {% if not session.completed %}
+                                <form method="POST" action="" enctype="multipart/form-data">
+                        				{{ form.hidden_tag() }}
+                        				<fieldset class="form-group">
+        								<div class="form-group">
+                							{{ form.zip_file.label() }}
+                							{{ form.zip_file(class="form-control-file") }}
+                							{% if form.zip_file.errors %}
+                							{% for error in form.zip_file.errors %}
+                							<span class="text-danger">{{ error }}</span><br>
+                							{% endfor %}
+                							{% endif %}
+                						</div>
+                    				</fieldset>
+                    				<div class="form-group">
+                    					{{ form.submit(class="btn btn-primary") }}
+                    				</div>
+                                </form>
+                                {% endif %}
+
+
+
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+{% endblock %}

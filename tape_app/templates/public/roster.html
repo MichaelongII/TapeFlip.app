@@ -1,0 +1,105 @@
+{% extends 'public_layout.html' %}
+
+{% block content %}
+    <section class="ftco-section ">
+        <div class="container">
+            <div class="row pt-5">
+                <div class="col-md-5 order-2">
+                    <img class="roster-img" src="{{url_for('static', filename='images/A2300s_manual.webp')}}" alt="">
+                </div>
+                <div class="col-md-7 order-1">
+                    <br>
+                    <h2 class="text-primary">Teac A-2300s (Reel-to-Reel)</h2>
+                    <p class="text-black">
+                        Manufactured in Japan in the 1970s the Teac A-2300s is a
+                        semi-professional tape deck for stereo listening
+                        and recording.
+                    </p>
+
+                    <table class="table stats-table">
+                      <thead>
+                        <tr>
+
+                          <th scope="col">Stats</th>
+
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th class="text-black" scope="row">Tape Speeds</th>
+                          <td class="text-primary">3 3⁄4, 7 1⁄2 ips</td>
+                        </tr>
+                        <tr>
+                          <th class="text-black" scope="row">Frequency Response</th>
+                          <td class="text-primary">40Hz to 18kHz</td>
+                        </tr>
+                        <tr>
+                          <th class="text-black" scope="row">Signal to Noise Ratio</th>
+                          <td class="text-primary">48dB</td>
+                        </tr>
+                        <tr>
+                          <th class="text-black" scope="row">Wow and Flutter</th>
+                          <td class="text-primary">0.08%</td>
+                        </tr>
+                        <tr>
+                          <th class="text-black" scope="row">Total Harmonic Distortion</th>
+                          <td class="text-primary">1.5%</td>
+                        </tr>
+                    </tbody>
+                     </table>
+                </div>
+
+            </div>
+            <div class="row pt-5">
+                <div class="col-md-5 order-2">
+                    <img class="roster-img" src="{{url_for('static', filename='images/sony_TC-K35.webp')}}" alt="">
+                </div>
+                <div class="col-md-7 order-1">
+                    <br>
+                    <h2 class="text-primary">Sony TC-K35 (Cassette)</h2>
+                    <p class="text-black">
+                        Manufactured in Japan from 1978-1984 the Sony TC-K35 is a consumer stereo
+                        cassette deck, it has Dolby B noise reduction that reduces tape hiss.
+                    </p>
+                    <table class="table stats-table">
+                      <thead>
+                        <tr>
+
+                          <th scope="col">Stats</th>
+
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th class="text-black" scope="row">Tape Speed</th>
+                          <td class="text-primary">4.75 cm/s</td>
+                        </tr>
+                        <tr>
+                          <th class="text-black" scope="row">Frequency Response</th>
+                          <td class="text-primary">20Hz to 17kHz</td>
+                        </tr>
+                        <tr>
+                          <th class="text-black" scope="row">Signal to Noise Ratio</th>
+                          <td class="text-primary">68dB</td>
+                        </tr>
+                        <tr>
+                          <th class="text-black" scope="row">Wow and Flutter</th>
+                          <td class="text-primary">0.05%</td>
+                        </tr>
+                        <tr>
+                          <th class="text-black" scope="row">Total Harmonic Distortion</th>
+                          <td class="text-primary">1.3%</td>
+                        </tr>
+                    </tbody>
+                     </table>
+                </div>
+
+            </div>
+
+
+
+    </section>
+
+{% endblock %}

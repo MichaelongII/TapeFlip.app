@@ -1,0 +1,133 @@
+
+
+{% extends 'public_layout.html' %}
+{% block content %}
+<section class="ftco-section">
+	<div class="container">
+		<!-- <p>Click then + button to add an audio file to your session.
+			Upload the file then enter the .. .. .. .. and ... yer.
+			Click next to see a break down of your session to review before submission.
+		</p> -->
+
+			{# Show all subforms #}
+			<form id="sound-form" action="" method="POST" role="form" enctype="multipart/form-data">
+				{{ form.hidden_tag() }}
+				<div class="form-group">
+					{{ form.session_name.label(class="form-control-label") }}
+					{% if form.session_name.errors %}
+					{{ form.session_name(class="form-control form-control-lg is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.session_name.errors %}
+						<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+					{% else %}
+					{{ form.session_name(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<button id="add" class="btn-xl btn-secondary btn-circle mt-2 mb-2" type="button">
+						<i class="ni ni-fat-add"></i>
+
+						</button>
+					</div>
+				</div>
+				<div id="subforms-container">
+					{% for subform in form.sounds %}
+					<div id="sound-{{ loop.index0 }}-form" class="subform row mr-0 ml-0" data-index="{{ loop.index0 }}">
+							<div class="col-sm-1">
+							</div>
+							<div class="col-sm-11 p-0">
+								<div class="form-group">
+									{{ subform.machine.label(class="form-control-label") }}
+									{% if subform.machine.errors %}
+									{{ subform.machine(class="custom-select-lg form-control form-control-lg is-invalid") }}
+									{% for error in  subform.machine.errors %}
+									<div class="invalid-feedback">
+										<span>{{ error }}</span>
+									</div>
+									{% endfor %}
+									{% else %}
+									{{ subform.machine(class="custom-select-lg form-control form-control-lg") }}
+									{% endif %}
+								</div>
+								<div class="form-group">
+									{{ subform.options.label(class="form-control-label") }}
+									{% if subform.options.errors %}
+									{{ subform.options(class="custom-select-lg form-control form-control-lg is-invalid") }}
+									{% for error in  subform.options.errors %}
+									<div class="invalid-feedback">
+										<span>{{ error }}</span>
+									</div>
+									{% endfor %}
+									{% else %}
+									{{ subform.options(class="custom-select-lg form-control form-control-lg") }}
+									{% endif %}
+								</div>
+								<div class="form-group">
+									{{ subform.file_name.label(class="form-control-label") }}
+									{% if subform.file_name.errors %}
+									<br>
+									{{ subform.file_name(class="is-invalid") }}
+									{% for error in  subform.file_name.errors %}
+									<div class="invalid-feedback">
+										<span>{{ error }}</span>
+									</div>
+									{% endfor %}
+									{% else %}
+									<br>
+									{{ subform.file_name(class="") }}
+									{% endif %}
+								</div>
+							</div>
+					</div>
+					{% endfor %}
+				</div>
+				<button type="submit" class="btn btn-primary mt-3">Next</button>
+
+			</form>
+
+
+	</div>
+	{# Form template #}
+	<div id="sound-_-form" class="d-none row mr-0 ml-0" data-index="_">
+			<div class="col-sm-12 p-0">
+				<button class="remove btn-xl btn-circle btn-primary mt-2 mb-2" href="#">
+				<i class="ni ni-fat-delete"></i>
+				</button>
+			</div>
+			<div class="col-sm-1">
+			</div>
+			<div class="col-sm-11 p-0">
+				<div class="form-group">
+					<label class="form-control-label" for="sounds-_-machine">Tape Machine</label>
+					<select class="custom-select-lg form-control form-control-lg" id="sounds-_-machine" name="sounds-_-machine" required="">
+						<option value="Teac A-2300s (Reel 2 Reel)">Teac A-2300s (Reel 2 Reel)</option>
+						<option value="Sony TC-K35 (Cassette)">Sony TC-K35 (Cassette)</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label class="form-control-label" for="sounds-_-options">Speed (Reel 2 Reel only)</label>
+					<select class="custom-select-lg form-control form-control-lg" id="sounds-_-options" name="sounds-_-options" required="">
+						<option value="Normal-Speed">Normal-Speed</option>
+						<option value="Half-Speed">Half-Speed</option>
+						<option value="Double-Speed">Double-Speed</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label class="form-control-label" for="sounds-_-file_name">Select Audio File</label><br>
+					<input class="" id="sounds-_-file_name" name="sounds-_-file_name" type="file">
+				</div>
+			</div>
+
+	</div>
+</section>
+
+
+
+
+
+
+
+{% endblock %}

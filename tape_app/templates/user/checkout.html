@@ -1,0 +1,54 @@
+
+
+{% extends 'public_layout.html' %}
+{% block content %}
+<section class="ftco-section ">
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-12 mb-5 mb-xl-0">
+				<div class="card card-profile shadow">
+					<div class="row ">
+						<div class="col-lg-3 order-lg-2">
+						</div>
+					</div>
+					<div class="card-header  border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+						<div class="row">
+							<div class="col-lg-10">
+								<h1>
+									Your Purchase of <span class="text-primary">{{num_of_credits}}<i class="ni ni-tag"></i></span>
+								</h1>
+							</div>
+						</div>
+					</div>
+					<div class="card-body pt-0 pt-md-4 row">
+						<div class="col-lg-6">
+						    <p class="text-black">You will receive <span class="text-primary">{{num_of_credits}}<i class="ni ni-tag"></i></span>
+                                cedits after paying ${{price}}USD by clicking the PayPal button below.
+                                You can pay with any payment method through your PayPal account, or if you dont't have a
+                                PayPal account you can use a credit card.
+                            </p>
+						</div>
+                        <div class="col-lg-6">
+                        </div>
+					</div>
+					<div class="card-footer border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+						<div class="row align-items-end">
+							<div class="col-lg-8">
+								<h2>Your Total credits after purchase:<br>
+								<span class="text-primary credits">{{current_user.credits + num_of_credits}}<i class="ni ni-tag"></i>
+								</span></h2>
+							</div>
+							<div class="col-lg-4">
+                                <div id="paypal-button" class="text-center mt-4 mb-2"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% include 'sections/paypal_script.html' %}
+
+{% endblock %}

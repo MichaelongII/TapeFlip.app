@@ -1,0 +1,44 @@
+{% extends 'public_layout.html' %}
+
+{% block content %}
+    <section class="ftco-section ">
+        <div class="container">
+            <div class="card card-profile shadow">
+
+                <div class="card-header border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                    <div class="row m-4">
+                        <div class="col-md-12">
+                            <h1>Active Credit Codes</h1>
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <div class="card-body pt-0 pt-md-4 row">
+
+                    <table class="table col-md-12 m-4">
+                      <thead>
+                        <tr>
+                            <th scope="col">Action</th>
+                            <th scope="col">Code</th>
+                            <th scope="col"># of Credits</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          {% for code in codes %}
+                        <tr>
+
+                          <th class="text-black" scope="row"><a href="{{url_for('bp_admin.delete_code', code_id=code.id)}}">Delete</a></th>
+                          <th class="text-black" scope="row">{{code.code}}</th>
+                          <td class="text-primary">{{code.credits}}<i class="ni ni-tag"></i></td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                     </table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

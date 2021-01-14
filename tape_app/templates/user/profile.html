@@ -1,0 +1,109 @@
+
+
+{% extends 'public_layout.html' %}
+{% block content %}
+<section class="ftco-section ">
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-6 order-xl-2 mb-5 mb-xl-0">
+				<div class="card card-profile shadow">
+					<div class="row ">
+						<div class="col-lg-3 order-lg-2">
+						</div>
+					</div>
+					<div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+						<div class="d-flex justify-content-between">
+							<a href="{{url_for('bp_users.update_account')}}" class="btn btn-primary">Edit Profile</a>
+							<a href="{{url_for('bp_users.redeem')}}" class="btn btn-primary">Redeem Code</a>
+						</div>
+					</div>
+					<div class="card-body pt-0 pt-md-4">
+						<div class="d-flex justify-content-center">
+							<div class="card-profile-image mt-3">
+								<img src="{{ url_for('static', filename='images/avi'+'/'+current_user.image_file) }}" class="avi">
+							</div>
+						</div>
+						<div class="text-center ">
+							<h3>
+								{{current_user.username}}
+							</h3>
+							<div class="h5 font-weight-300">
+								{{current_user.email}}
+							</div>
+
+						</div>
+					</div>
+					<div class="card-footer text-right pt-0 pt-md-4">
+						<div class="h2">
+							<span class="credits text-primary">{{current_user.credits}}<i class="ni ni-tag"></i></span> in your wallet
+						</div>
+						<h5><a href="{{url_for('bp_main.pricing')}}">need more?</a></h5>
+					</div>
+				</div>
+			</div>
+            <div class="col-xl-6 order-xl-1">
+    		<div class="card shadow">
+    			<div class="card-header bg-white border-0">
+    				<div class="row align-items-center">
+    					<div class="col-8">
+    						<h2 class="mb-0">Your sessions:</h2>
+    					</div>
+    					<div class="col-4 text-right">
+    					</div>
+    				</div>
+    			</div>
+    			<div class="card-body">
+    				{% for session in sessions.items %}
+    				<div class="card mb-2">
+    					<div class="card-body">
+
+							{% if not session.submitted %}
+    						<span class="card-title text-primary">
+    							Not submitted!
+    						</span>
+							{% elif session.submitted and not session.completed%}
+							<span class="card-title text-danger">
+								In Progress
+							</span>
+							{% else %}
+							<span class="card-title text-danger">
+    							Completed
+    						</span>
+							{% endif %}
+
+
+    							<h3 class="card-title">
+									<a class="text-black" href="{{url_for('bp_posts.session' ,session_id=session.id)}}">
+    									{{ session.session_name }}
+    								</a>
+								</h3>
+
+								<ul>
+    							{% for sound in session.sounds %}
+									<li>{{sound.file_name}} ({{sound.options}})</li>
+								{% endfor %}
+								</ul>
+    						<small class="">{{ session.date_posted.strftime('%Y-%m-%d') }}</small>
+    					</div>
+    				</div>
+    				{% endfor %}
+    				<div class="container p-0">
+    					{% for page_num in sessions.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    					{% if page_num %}
+    					{% if page == page_num %}
+    					<a class="btn btn-primary mt-4 mb-4" href="{{ url_for('bp_users.profile', page=page_num) }}">{{page_num}}</a>
+    					{% else %}
+    					<a class="btn btn-outline-primary mt-4 mb-4" href="{{ url_for('bp_users.profile', page=page_num) }}">{{page_num}}</a>
+    					{% endif %}
+    					{% else %}
+    					...
+    					{%endif%}
+    					{% endfor %}
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

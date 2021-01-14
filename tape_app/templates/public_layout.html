@@ -1,0 +1,178 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{% if title %}
+		<title>Tape Filp - {{title}}</title>
+		{% else %}
+		<title>Tape Filp</title>
+		{% endif %}
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="{{url_for('static', filename='css/fonts/poppins.min.css')}}">
+		<link rel="stylesheet" href="{{url_for('static', filename='css/fonts/barlow.min.css')}}">
+		<link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i" rel="stylesheet">
+		<link rel="stylesheet" href="{{url_for('static', filename='css/style.min.css')}}">
+		<link rel="stylesheet" href="{{url_for('static', filename='css/my.min.css')}}">
+		<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+		<link href="{{url_for('static', filename='nucleo/css/nucleo.min.css')}}" rel="stylesheet">
+	</head>
+	<body>
+		<!-- END nav -->
+		<div id="background" class="hero-wrap" style="background-image: url('{{url_for('static',filename='images/main_page.webp')}}');">
+			<div class="overlay"></div>
+			<div class="container">
+				<nav class="row navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+					<button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation" onclick="expandBackground()">
+					<span class="navbar-toggler-icon burger mb-3"></span>
+					</button>
+					<div class="collapse navbar-collapse pl-3" id="ftco-nav">
+
+						<ul class="navbar-nav ml-auto">
+							{% include 'sections/header_items.html' %}
+						</ul>
+					</div>
+				</nav>
+				<div class="row header no-gutters header-text " data-scrollax-parent="true">
+					<div class="col-lg-12 header-title ">
+						<h1 class=" mr-5" data-text="{{title}}">{{title}}</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+
+			{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+			<section class="ftco-section flash">
+				<div class="container">
+					{% for category, message in messages %}
+					<div class="mt-1 alert alert-{{ category }}">
+						{{ message }}
+					</div>
+					{% endfor %}
+				</div>
+			</section>
+			{% endif %}
+			{% endwith %}
+
+        {% block content %} {% endblock %}
+		{% include 'sections/footer.html' %}
+
+		<!-- loader -->
+		<div id="ftco-loader" class="fullscreen">
+			<svg class="circular" width="48px" height="48px">
+				<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+				<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/>
+			</svg>
+		</div>
+		<script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+		<script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+		<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
+		{% if include_form_script %}
+		<script type="text/javascript">
+			/**
+			 * Adjust the indices of form fields when removing items.
+			 */
+			function adjustIndices(removedIndex) {
+				var $forms = $('.subform');
+
+				$forms.each(function(i) {
+					var $form = $(this);
+					var index = parseInt($form.data('index'));
+					var newIndex = index - 1;
+
+					if (index < removedIndex) {
+						// Skip
+						return true;
+					}
+
+					// Change ID in form itself
+					$form.attr('id', $form.attr('id').replace(index, newIndex));
+					$form.data('index', newIndex);
+
+					// Change IDs in form inputs
+					$form.find('input').each(function(j) {
+						var $item = $(this);
+						$item.attr('id', $item.attr('id').replace(index, newIndex));
+						$item.attr('name', $item.attr('name').replace(index, newIndex));
+					});
+				});
+			}
+
+			/**
+			 * Remove a form.
+			 */
+			function removeForm() {
+				var $removedForm = $(this).closest('.subform');
+				var removedIndex = parseInt($removedForm.data('index'));
+
+				$removedForm.remove();
+
+				// Update indices
+				adjustIndices(removedIndex);
+			}
+
+			/**
+			 * Add a new form.
+			 */
+			function addForm() {
+				var $templateForm = $('#sound-_-form');
+
+				if (!$templateForm) {
+					console.log('[ERROR] Cannot find template');
+					return;
+				}
+
+				// Get Last index
+				var $lastForm = $('.subform').last();
+
+				var newIndex = 0;
+
+				if ($lastForm.length > 0) {
+					newIndex = parseInt($lastForm.data('index')) + 1;
+				}
+
+				// Maximum of 20 subforms
+				if (newIndex > 20) {
+					console.log('[WARNING] Reached maximum number of elements');
+					return;
+				}
+
+				// Add elements
+				var $newForm = $templateForm.clone();
+
+				$newForm.attr('id', $newForm.attr('id').replace('_', newIndex));
+				$newForm.data('index', newIndex);
+
+				$newForm.find('input, select').each(function(idx) {
+					var $item = $(this);
+
+					$item.attr('id', $item.attr('id').replace('_', newIndex));
+					$item.attr('name', $item.attr('name').replace('_', newIndex));
+				});
+
+				// Append
+				$('#subforms-container').append($newForm);
+				$newForm.addClass('subform');
+				$newForm.removeClass('d-none');
+
+				$newForm.find('.remove').click(removeForm);
+			}
+
+
+			$(document).ready(function() {
+				$('#add').click(addForm);
+				$('.remove').click(removeForm);
+			});
+		</script>
+		<script type="text/javascript">
+			$(".custom-file-input").on("change", function() {
+				var fileName = $(this).val().split("\\").pop();
+				$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+			});
+		</script>
+		{% endif %}
+	</body>
+</html>

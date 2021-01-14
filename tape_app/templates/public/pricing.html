@@ -1,0 +1,126 @@
+{% extends 'public_layout.html' %}
+
+{% block content %}
+    <section class="ftco-section ">
+        <div class="container">
+        <div class="row">
+
+
+            {% for option in options %}
+            <div class="col-md-3">
+                <div class="pricingTable">
+                    <div class="pricing_heading">
+                        <h3 class="title">Credits</h3>
+                        <span class="value">
+                            {{ option.credits }}<i class="ni ni-tag"></i>
+                            <span class="month"><span class="for">for</span> ${{ option.price }}.00</span>
+                        </span>
+                    </div>
+                    <div class="content">
+                        <ul>
+                          {% for desc in option.desc_list %}
+                            <li>{{ desc }}</li>
+                          {% endfor %}
+                            <!-- <li>For producers who want to experiment with the tape sound.</li> -->
+
+                        </ul>
+                        <div class="link">
+                            <a class="btn btn-outline-primary" href="{{url_for('bp_users.checkout',num_of_credits=option.credits)}}">Get Credits</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+        <div class="row pt-5">
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-6 text-right">
+                <h5>
+                    <a href="mailto:reelone@tapeflip.app?subject=TapeFlip.app%20bulk%20deal%20inquiry&body=Please%20include%20roughly%20how%20many%20audio%20files%20you%20want%20to%20get%20recorded%20on%20tape." >
+                        do you sell sample packs or are looking for a bulk deal?<br>hit us up by clicking here
+                    </a>
+                </h5>
+            </div>
+        </div>
+    </div>
+
+    </section>
+    <section class="ftco-section ">
+        <div class="container">
+                <div class="card card-profile shadow">
+
+					<div class="card-header border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                        <div class="row m-4">
+                            <div class="col-md-6">
+                                <h1>What do your credits get you?</h1>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-black">
+                                    Credits are exhanged for tape recordings of your audio files,
+                                    the length of the file determines the amount of credits
+                                    a tape recording costs.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="card-body pt-0 pt-md-4 row">
+
+						<table class="table col-md-12 m-4">
+                          <thead>
+                            <tr>
+
+                              <th scope="col">Length of Audio File</th>
+
+                              <th scope="col"># of Credits</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th class="text-black" scope="row">30 seconds or less</th>
+                              <td class="text-primary">3<i class="ni ni-tag"></i></td>
+                            </tr>
+                            <tr>
+                              <th class="text-black" scope="row">1 minute or less</th>
+                              <td class="text-primary">6<i class="ni ni-tag"></i></td>
+                            </tr>
+                            <tr>
+                              <th class="text-black" scope="row">2 minutes or less</th>
+                              <td class="text-primary">12<i class="ni ni-tag"></i></td>
+                            </tr>
+                            <tr>
+                              <th class="text-black" scope="row">More than 2 minutes</th>
+                              <td class="text-primary">15<i class="ni ni-tag"></i></td>
+                            </tr>
+                        </tbody>
+                         </table>
+                    </div>
+
+            </div>
+    </section>
+
+    <!-- <script src="{{url_for('static', filename='js/wavesurfer.min.js')}}"></script>
+
+
+    <script type="text/javascript">
+
+        var wavesurfer_1 = WaveSurfer.create({
+            container: document.querySelector('#waveform-1'),
+            waveColor: '#3F5DCA',
+            progressColor: '#000',
+            cursorColor: '#fff',
+            barWidth: 6,
+            barRadius: 0,
+            cursorWidth: 1,
+            height: 700,
+            barGap: 3
+        });
+
+        wavesurfer_1.load('{{url_for('static', filename='audio/BRIGHTER_HEIGHTS(SAMPLE_150_BPM).mp3')}}');
+		wavesurfer_1.drawBuffer();
+
+    </script> -->
+{% endblock %}

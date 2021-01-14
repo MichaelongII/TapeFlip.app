@@ -1,0 +1,56 @@
+{% extends 'public_layout.html' %}
+
+{% block content %}
+    <section class="ftco-section ">
+        <div class="container">
+            <form method="POST" action="">
+        				{{ form.hidden_tag() }}
+        				<fieldset class="form-group">
+        					<div class="form-group">
+        						{{ form.num_of_codes.label(class="form-control-label") }}
+        						{% if form.num_of_codes.errors %}
+        						{{ form.num_of_codes(class="form-control form-control-lg is-invalid") }}
+        						<div class="invalid-feedback">
+        							{% for error in form.num_of_codes.errors %}
+        							<span>{{ error }}</span>
+        							{% endfor %}
+        						</div>
+        						{% else %}
+        						{{ form.num_of_codes(class="form-control form-control-lg") }}
+        						{% endif %}
+        					</div>
+        					<div class="form-group">
+        						{{ form.num_of_credits.label(class="form-control-label") }}
+        						{% if form.num_of_credits.errors %}
+        						{{ form.num_of_credits(class="form-control form-control-lg is-invalid") }}
+        						<div class="invalid-feedback">
+        							{% for error in form.num_of_credits.errors %}
+        							<span>{{ error }}</span>
+        							{% endfor %}
+        						</div>
+        						{% else %}
+        						{{ form.num_of_credits(class="form-control form-control-lg") }}
+        						{% endif %}
+        					</div>
+                            <div class="form-group">
+        						{{ form.prefix.label(class="form-control-label") }}
+        						{% if form.prefix.errors %}
+        						{{ form.prefix(class="form-control form-control-lg is-invalid") }}
+        						<div class="invalid-feedback">
+        							{% for error in form.prefix.errors %}
+        							<span>{{ error }}</span>
+        							{% endfor %}
+        						</div>
+        						{% else %}
+        						{{ form.prefix(class="form-control form-control-lg") }}
+        						{% endif %}
+        					</div>
+
+        				</fieldset>
+        				<div class="form-group">
+        					{{ form.submit(class="btn btn-primary") }}
+        				</div>
+        			</form>
+        </div>
+    </section>
+{% endblock %}

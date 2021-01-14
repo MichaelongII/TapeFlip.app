@@ -1,0 +1,6 @@
+
+{% if is_authenticated %}
+<a class="btn btn-primary" href="{{ url_for('bp_posts.new_session') }}" >Create a Session</a>
+{% else %}
+<a class="btn btn-primary" href="{{ url_for('bp_users.register') }}" >Sign up now</a>
+{% endif %}

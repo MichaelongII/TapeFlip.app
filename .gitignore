@@ -1,0 +1,9 @@
+*.pyc
+*.pyo
+.DS_Store
+__pycache__/
+site.db
+protected/
+config.py
+manager.py
+migrations/

@@ -1,0 +1,115 @@
+
+
+{% extends 'public_layout.html' %}
+{% block content %}
+<section class="ftco-section ">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-xl-12 mb-5 mb-xl-0">
+				<div class="card card-profile shadow">
+					<div class="row ">
+						<div class="col-lg-3 order-lg-2">
+						</div>
+					</div>
+					<div class="card-header  border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+						<div class="row">
+							<div class="col-lg-10">
+								<h1>
+									{{session.session_name}}
+									{% if not session.submitted %}
+										(Not Submitted)
+									{% elif session.submitted and not session.completed %}
+										(In Progress)
+									{% else %}
+										(Completed)
+									{% endif %}
+								</h1>
+							</div>
+						</div>
+					</div>
+					<div class="card-body pt-0 pt-md-4 row">
+						<div class="col-lg-12 ">
+							<h5>Audio files:</h5>
+								{% for sound in session.sounds %}
+									<h4>
+										{% if not session.submitted %}
+										<button class="btn btn-circle btn-primary mr-2" data-toggle="modal" data-target="#deleteSoundModal{{sound.id}}">
+											<i class="ni ni-fat-delete"></i>
+										</button >
+										{% endif %}
+										{{sound.file_name}} ({{sound.machine}}, {{sound.options}}) -
+										<span class="text-primary credits">{{sound.credits}}<i class="ni ni-tag"></i>
+										</span>
+									</h4>
+								{% endfor %}
+						</div>
+
+
+					</div>
+					<div class="card-footer border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+						<div class="row align-items-end">
+							<div class="col-lg-6">
+								<h2>Total credits:<br>
+								<span class="text-primary credits">{{session.credits}}<i class="ni ni-tag"></i>
+								</span></h2>
+							</div>
+							<div class="col-lg-6">
+								{% if session.credits > session.user.credits %}
+									<h5 class="float-right">Oops, looks like your low on credits. Either <a href="{{url_for('bp_main.pricing')}}">get more credits</a> or remove some sounds from this session to submit it for recording.</h5>
+								{% elif not session.submitted %}
+									<a href="{{url_for('bp_posts.submit_session', session_id=session.id)}}" class="btn btn-outline-primary mb-3 float-right">Submit for recording</a>
+								{% elif session.submitted and not session.completed %}
+									<h5 class="float-right">Your session is currently in progress. You'll be notified when it is done.</h5>
+								{% elif session.completed %}
+									<a href="{{url_for('bp_posts.download_zip', session_id=session.id)}}" class="btn btn-outline-primary mb-3 float-right">Download your files</a>
+								{% endif %}
+
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<!-- <div class="col-xl-12 mb-5 mb-xl-0">
+				<div class="card card-profile shadow">
+					<div class="card-footer text-right pt-0 pt-md-4">
+						<div class="h2">
+							<span class="credits text-primary">{{current_user.credits}}<i class="ni ni-tag"></i></span> in your wallet
+						</div>
+						<h5><a href="#">need more?</a></h5>
+					</div>
+				</div>
+			</div> -->
+
+		</div>
+	</div>
+</section>
+
+{% for sound in session.sounds %}
+	<div class="modal fade" id="deleteSoundModal{{sound.id}}" tabindex="-1" role="dialog" aria-labelledby="deleteSoundModal{{sound.id}}Label" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="deleteSoundModal{{sound.id}}Label">Delete Sound</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body text-black">
+	        Are you sure you want to delete this sound from your session?<br>
+			If this is the last sound in the session the entire session will be deleted.
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	        <a type="button" class="btn btn-primary" href="{{ url_for('bp_posts.remove_file', sound_id=sound.id) }}">Yes, delete sound</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+{% endfor %}
+
+
+{% endblock %}

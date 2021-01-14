@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Tape Flip</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="{{url_for('static', filename='css/fonts/poppins.min.css')}}">
+		<link rel="stylesheet" href="{{url_for('static', filename='css/fonts/barlow.min.css')}}">
+		<link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i" rel="stylesheet">
+		<link rel="stylesheet" href="{{url_for('static', filename='css/style.min.css')}}">
+		<link rel="stylesheet" href="{{url_for('static', filename='css/my.min.css')}}">
+	</head>
+	<body>
+		<!-- END nav -->
+		<div id="background" class="hero-wrap" style="background-image: url('{{url_for('static',filename='images/main_page.webp')}}');">
+			<div class="overlay"></div>
+			<div class="container">
+				<nav class="row mb-5 navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+					<button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation" onclick="expandBackground()">
+					    <span class="navbar-toggler-icon burger mb-3"></span>
+					</button>
+					<div class="collapse navbar-collapse pl-3" id="ftco-nav">
+						<ul class="navbar-nav ml-auto">
+							{% include 'sections/header_items.html' %}
+						</ul>
+					</div>
+				</nav>
+
+				<div class="row main-page no-gutters slider-text align-items-end justify-content-end" data-scrollax-parent="false">
+					<div class="col-md-11 text-justify mb-5 pr-lg-4">
+						<div class="tape_container" role="img" aria-label="animated digital illustration of an audio recorder made with CSS">
+							<div class="main">
+								<div class="circle c1">
+									<div class="inner-C">
+										<div class="inner-inner"></div>
+										<div class="hole hole1">
+											<div class="line h-Top"></div>
+											<div class="line h-Right"></div>
+											<div class="line h-Bottom"></div>
+											<div class="line h-Left"></div>
+										</div>
+										<div class="hole hole2">
+											<div class="line h-Top"></div>
+											<div class="line h-Right"></div>
+											<div class="line h-Bottom"></div>
+											<div class="line h-Left"></div>
+										</div>
+										<div class="hole hole3">
+											<div class="line h-Top"></div>
+											<div class="line h-Right"></div>
+											<div class="line h-Bottom"></div>
+											<div class="line h-Left"></div>
+										</div>
+									</div>
+								</div>
+								<div class="circle c2">
+									<div class="inner-C">
+										<div class="inner-inner"></div>
+										<div class="hole hole1">
+											<div class="line h-Top"></div>
+											<div class="line h-Right"></div>
+											<div class="line h-Bottom"></div>
+											<div class="line h-Left"></div>
+										</div>
+										<div class="hole hole2">
+											<div class="line h-Top"></div>
+											<div class="line h-Right"></div>
+											<div class="line h-Bottom"></div>
+											<div class="line h-Left"></div>
+										</div>
+										<div class="hole hole3">
+											<div class="line h-Top"></div>
+											<div class="line h-Right"></div>
+											<div class="line h-Bottom"></div>
+											<div class="line h-Left"></div>
+										</div>
+									</div>
+								</div>
+								<div class="m2">
+									<div class="sRec"></div>
+									<div class="rec">
+										<div class="mini-Circle mc1"></div>
+										<div class="mini-Circle mc2"></div>
+										<div class="mini-Circle mcBig"></div>
+										<div class="line line-Left"></div>
+										<div class="line line-Left2"></div>
+										<div class="line line-Right"></div>
+										<div class="line line-Right2"></div>
+									</div>
+								</div>
+								<div class="m3">
+									<div class="nobs nobs1">
+										<div class="mini-Circle mc3"></div>
+										<div class="mini-Circle mc4"></div>
+										<div class="mini-Circle mc5"></div>
+									</div>
+									<!--
+										-->
+									<div class="boxes boxes1">
+										<div class="box box1">
+											<div class="meter meter1"></div>
+										</div>
+										<div class="box box2">
+											<div class="meter meter2"></div>
+										</div>
+									</div>
+									<!--
+										-->
+									<div class="boxes boxes2">
+										<div class="box box3">
+											<div class="meter meter3"></div>
+										</div>
+										<div class="box box4">
+											<div class="meter meter4"></div>
+										</div>
+									</div>
+									<!--
+										-->
+									<div class="nobs nobs2">
+										<div class="mini-Circle mc6"></div>
+										<div class="mini-Circle mc7"></div>
+										<div class="mini-Circle mc8"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<h1 class="mb-0 home-text">Your samples, <span class="glitch text-white" data-text="Recorded on Tape.">Recorded on Tape.</span></h1>
+						<h3 class="subheading mb-3 pb-1">
+                            TapeFlip.app lets you get real tape recordings of your music.
+							Easily upload your audio files and then download their tape recordings.
+                        </h3>
+                        {% include 'sections/landing_button.html' %}
+					</div>
+				</div>
+			</div>
+		</div>
+
+        {% include 'sections/landing_demo_sc.html' %}
+
+		{% include 'sections/footer.html' %}
+		<!-- loader -->
+		<div id="ftco-loader" class="fullscreen">
+			<svg class="circular" width="48px" height="48px">
+				<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+				<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/>
+			</svg>
+		</div>
+		<script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+		<script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+		<script type="text/javascript">
+			function expandBackground() {
+				var bg = document.getElementById("background" );
+				bg.classList.toggle("open")
+			}
+		</script>
+
+	</body>
+</html>

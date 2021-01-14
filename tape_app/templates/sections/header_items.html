@@ -1,0 +1,24 @@
+
+{% if not is_authenticated %}
+    <li class="nav-item"><a href="{{url_for('bp_main.home')}}" class="nav-link">Home</a></li>
+    <li class="nav-item"><a href="{{url_for('bp_main.roster')}}" class="nav-link">Tape Machines</a></li>
+
+    <!-- <li class="nav-item"><a href="sermons.html" class="nav-link">Demos</a></li> -->
+{% endif %}
+{% if not admin %}
+    <li class="nav-item"><a href="{{url_for('bp_main.pricing')}}" class="nav-link">Credits</a></li>
+
+{% endif %}
+{% if not is_authenticated %}
+    <li class="nav-item"><a href="{{url_for('bp_users.login')}}" class="nav-link">Login</a></li>
+    <!-- <li class="nav-item"><a href="{{url_for('bp_users.register')}}" class="nav-link">Register</a></li> -->
+{% else %}
+    {% if admin %}
+        <li class="nav-item"><a href="{{url_for('bp_admin.dashboard')}}" class="nav-link">Dashboard</a></li>
+        <li class="nav-item"><a href="{{url_for('bp_users.logout')}}" class="nav-link">Logout</a></li>
+    {% else %}
+        <li class="nav-item"><a href="{{url_for('bp_posts.new_session')}}" class="nav-link">New Session</a></li>
+        <li class="nav-item"><a href="{{url_for('bp_users.profile')}}" class="nav-link">Profile</a></li>
+    <li class="nav-item"><a href="{{url_for('bp_users.logout')}}" class="nav-link">Logout</a></li>
+    {% endif %}
+{% endif %}
